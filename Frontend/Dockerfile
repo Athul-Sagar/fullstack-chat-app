@@ -2,11 +2,11 @@
 FROM node:18 AS builder
 
 WORKDIR /frontend
-
-COPY package.json package-lock.json ./
+COPY frontend/package.json frontend/package-lock.json ./
 RUN npm install
 
-COPY . .
+COPY frontend/. .
+
 RUN npm run build  # Ensure this generates 'build/' or another directory
 
 # Stage 2: Serve with Nginx

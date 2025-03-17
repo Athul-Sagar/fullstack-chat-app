@@ -5,8 +5,6 @@ services:
       - "5000:5000"  # Ensure backend listens on port 5000
     env_file:
       - ./backend/.env  # Loads environment variables from .env
-    depends_on:
-      - mongodb
     restart: always  # Ensures the container restarts if it fails
 
   frontend:
@@ -16,17 +14,3 @@ services:
     depends_on:
       - backend
     restart: always
-
-  mongodb:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: athulsagar547
-      MONGO_INITDB_ROOT_PASSWORD: chatapp
-    volumes:
-      - mongodb_data:/data/db  # Prevents data loss
-    restart: always  # Ensures MongoDB restarts if it crashes
-
-volumes:
-  mongodb_data:  # Persistent storage for MongoDB
